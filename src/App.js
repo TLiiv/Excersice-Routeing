@@ -5,7 +5,7 @@
 //    - EventsPage
 //    - EventDetailPage
 //    - NewEventPage
-//    - EditEventPage
+//    - EditEventPage 
 // 2. Add routing & route definitions for these five pages
 //    - / => HomePage
 //    - /events => EventsPage
@@ -15,13 +15,37 @@
 // 3. Add a root layout that adds the <MainNavigation> component above all page components
 // 4. Add properly working links to the MainNavigation
 // 5. Ensure that the links in MainNavigation receive an "active" class when active
-// 6. Output a list of dummy events to the EventsPage
+// 6. Output a list of dummy events to the EventsPage //POOLELI
 //    Every list item should include a link to the respective EventDetailPage
 // 7. Output the ID of the selected event on the EventDetailPage
 // BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
 
+import { createBrowserRouter, RouterProvider }from 'react-router-dom';
+import Root from './routes/Root';
+import HomePage from './routes/HomePage';
+import EventsPage from './routes/EventsPage';
+import EventDetailPage from './routes/EventDetailPage';
+import NewEventPage from './routes/NewEventPage';
+import EditEventPage from './routes/EditEventPage';
+
 function App() {
-  return <div></div>;
+
+  const router = createBrowserRouter([
+    {path:'/',
+      element:<Root/>,
+      children:[
+        { path:'',element:<HomePage/>},
+        { path:'events',element:<EventsPage/>},
+        { path:'events/:id',element:<EventDetailPage/>},
+        { path:'events/new',element:<NewEventPage/>},
+        { path:'events/edit',element:<EditEventPage/>}
+      ]
+    }
+  ])
+
+  return <div>
+    <RouterProvider router={router}/>
+  </div>;
 }
 
 export default App;
