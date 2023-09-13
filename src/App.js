@@ -20,31 +20,51 @@
 // 7. Output the ID of the selected event on the EventDetailPage
 // BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
 
-import { createBrowserRouter, RouterProvider }from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/Root';
 import HomePage from './routes/HomePage';
 import EventsPage from './routes/EventsPage';
 import EventDetailPage from './routes/EventDetailPage';
 import NewEventPage from './routes/NewEventPage';
 import EditEventPage from './routes/EditEventPage';
+import EventsRoot from './routes/EventsRoot';
+
 
 function App() {
 
   const router = createBrowserRouter([
-    {path:'/',
-      element:<Root/>,
-      children:[
-        { path:'',element:<HomePage/>},
-        { path:'events',element:<EventsPage/>},
-        { path:'events/:id',element:<EventDetailPage/>},
-        { path:'events/new',element:<NewEventPage/>},
-        { path:'events/edit',element:<EditEventPage/>}
-      ]
-    }
+    {
+      path: '/',
+      element: <Root />,
+      children: [
+        { index: true, element: <HomePage /> },
+        {
+          path: 'events',
+          element: <EventsRoot />,
+          children: [
+            {
+              index: true, element: <EventsPage />, loader: async () => {
+                const response = await fetch('http://localhost:8080/events');
+
+                if (!response.ok) {
+                  //errorhandlig tulevikus
+                } else {
+                  const resData = await response.json();
+                  return resData.events;
+                }
+              }
+            },
+            { path: ':eventId', element: <EventDetailPage /> },
+            { path: 'new', element: <NewEventPage /> },
+            { path: 'eventId/edit', element: <EditEventPage /> },
+          ],
+        },
+      ],
+    },
   ])
 
   return <div>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </div>;
 }
 
