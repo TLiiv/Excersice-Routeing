@@ -28,6 +28,7 @@ import EventDetailPage from './routes/EventDetailPage';
 import NewEventPage from './routes/NewEventPage';
 import EditEventPage from './routes/EditEventPage';
 import EventsRoot from './routes/EventsRoot';
+import ErrorPage from './routes/ErrorPage';
 
 
 
@@ -37,6 +38,7 @@ function App() {
     {
       path: '/',
       element: <Root />,
+      errorElement:<ErrorPage/>,
       children: [
         { index: true, element: <HomePage /> },
         {
