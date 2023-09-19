@@ -1,6 +1,13 @@
+import EventForm from "../components/EventForm";
+
 function NewEventPage(){
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+    }
+    
     return (
-        <h1>NewEventPage </h1>
+        <EventForm/>
     )
 }
 
