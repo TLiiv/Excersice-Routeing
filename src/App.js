@@ -25,10 +25,11 @@ import Root from './routes/Root';
 import HomePage from './routes/HomePage';
 import EventsPage,{loader} from './routes/EventsPage';
 import EventDetailPage,{loader as eventDetailLoader} from './routes/EventDetailPage';
-import NewEventPage from './routes/NewEventPage';
+import NewEventPage,{action as NewEventAction} from './routes/NewEventPage';
 import EditEventPage from './routes/EditEventPage';
 import EventsRoot from './routes/EventsRoot';
 import ErrorPage from './routes/ErrorPage';
+
 
 
 
@@ -59,7 +60,7 @@ function App() {
               ]
             },
             
-            { path: 'new', element: <NewEventPage /> },
+            { path: 'new', element: <NewEventPage />, action:NewEventAction },
             
           ],
         },
