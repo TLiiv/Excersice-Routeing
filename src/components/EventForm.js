@@ -9,7 +9,7 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <Form className={classes.form} method='post'>
+    <Form className={classes.form} method='post' >
       <p>
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" defaultValue={event ? event.title : ''} required />
