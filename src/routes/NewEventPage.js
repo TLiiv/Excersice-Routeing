@@ -26,6 +26,10 @@ export async function action({ request, params }) {
     body: JSON.stringify(eventData),
   });
 
+  if(response.status === 422){
+    return response;//sends backend error, form validation is in backend
+  }
+
   if (!response.ok) {
     throw json({ message: 'Could not save event.' }, { status: 500 });
   }
