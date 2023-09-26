@@ -25,10 +25,11 @@ import Root from './routes/Root';
 import HomePage from './routes/HomePage';
 import EventsPage,{loader} from './routes/EventsPage';
 import EventDetailPage,{loader as eventDetailLoader,action as eventDeletAction} from './routes/EventDetailPage';
-import NewEventPage,{action as NewEventAction} from './routes/NewEventPage';
+import NewEventPage from './routes/NewEventPage';
 import EditEventPage from './routes/EditEventPage';
 import EventsRoot from './routes/EventsRoot';
 import ErrorPage from './routes/ErrorPage';
+import {action as manipulateAction} from './components/EventForm';
 
 
 
@@ -56,11 +57,11 @@ function App() {
               loader:eventDetailLoader,
               children:[
                 { index:true, element: <EventDetailPage /> , action:eventDeletAction},
-                { path: 'edit', element: <EditEventPage /> },
+                { path: 'edit', element: <EditEventPage />,action:manipulateAction },
               ]
             },
             
-            { path: 'new', element: <NewEventPage />, action:NewEventAction },
+            { path: 'new', element: <NewEventPage />, action:manipulateAction },
             
           ],
         },
